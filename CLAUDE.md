@@ -42,10 +42,11 @@ Keine Logikänderung ohne grünes `pnpm test` vom Root.
 
 ## Arbeitsregeln
 
-- Kleine Commits. `main` ist geschützt: Branch und Pull Request.
+- Branch: `feat/`, `fix/` oder `chore/` plus Ticketnummer. Ein Feature, ein Branch, ein PR.
+- Commit nach jedem grünen `pnpm test`, nicht nach der Sitzung.
 - Jede Logikänderung in `core` kommt mit Tests.
 - Keine neuen Abhängigkeiten ohne Rückfrage.
-- Spielregeln stehen in `docs/RULES.md`. Widerspricht der Code, gewinnt `RULES.md`.
+- Spielregeln: `docs/RULES.md`. Entscheidungen: `docs/DECISIONS.md` (eine Zeile, Datum, Begründung). Widerspricht der Code den Regeln, gewinnt `RULES.md`.
 
 ## Nicht tun
 
