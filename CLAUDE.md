@@ -1,43 +1,54 @@
 # CLAUDE.md
 
-Guidance for Claude Code and other agents working in this repository.
+Steuerung für Agents. Kurz halten. `docs/RULES.md` ist die Quelle der Wahrheit für Spielregeln.
 
-## Layout
+## Ziel
+
+Wir bauen einen wegwerfbaren Taktik-Prototypen, um Regellogik, Renderer und Simulation schnell voneinander zu trennen. Nichts hier ist produktreif oder auf Dauer angelegt. Falsche Annahmen ersetzen wir, statt den Code zu retten.
+
+## Struktur
 
 ```
-packages/core   Layer A: rule logic. No production dependencies.
-packages/web    Layer B: renderer. Imports @tactics/core.
-packages/sim    Headless simulator. Imports @tactics/core.
-docs/RULES.md   Canonical project rules (German).
+packages/core   Schicht A — Regellogik, keine Produktionsabhängigkeit
+packages/web    Schicht B — Renderer
+packages/sim    Headless-Simulator
+docs/RULES.md   Spielregeln
 docs/DECISIONS.md
 ```
 
-## Invariants
+- `core` darf `web` und `sim` nicht importieren.
+- `web` und `sim` dürfen `core` importieren.
+- Zufall in `core` nur über einen injizierten, seedbaren Generator. Nie `Math.random()`.
 
-Read `docs/RULES.md` before changing package boundaries or chance.
+## Befehle
 
-1. `@tactics/core` must not import `@tactics/web` or `@tactics/sim`.
-2. `@tactics/web` and `@tactics/sim` may import `@tactics/core`.
-3. Chance in `core` goes only through an injected, seedable generator (`createRng` / `requireRng`). Never `Math.random()`. A missing seed is an error. Same seed, same stream — otherwise tests and `sim` are worthless.
+Node 24.21.0 (`.nvmrc`). Immer vom Repo-Root:
 
-ESLint enforces (1) and the `Math.random()` ban in `packages/core/**`.
+| Befehl            | Zweck             |
+| ----------------- | ----------------- |
+| `pnpm test`       | Tests einmal      |
+| `pnpm test:watch` | Tests watch       |
+| `pnpm dev`        | Renderer starten  |
+| `pnpm lint`       | Lint              |
+| `pnpm typecheck`  | TypeScript strict |
 
-## Commands
+Keine Logikänderung ohne grünes `pnpm test` vom Root.
 
-Node version is pinned in `.nvmrc` (`24.21.0`).
+## Konventionen
 
-```bash
-nvm use
-pnpm install
-pnpm test
-pnpm test:watch
-pnpm lint
-pnpm typecheck
-pnpm dev
-```
+- TypeScript strict, kein `any`
+- Nur benannte Exporte
+- Dateinamen in kebab-case
 
-`pnpm test` is the agent feedback loop. Do not land rule or renderer changes without a green run from the repo root.
+## Arbeitsregeln
 
-## Workflow
+- Kleine Commits. `main` ist geschützt: Branch und Pull Request.
+- Jede Logikänderung in `core` kommt mit Tests.
+- Keine neuen Abhängigkeiten ohne Rückfrage.
+- Spielregeln stehen in `docs/RULES.md`. Widerspricht der Code, gewinnt `RULES.md`.
 
-`main` is protected. Work on a branch and merge through a pull request.
+## Nicht tun
+
+- Balancing-Zahlen nicht eigenmächtig ändern.
+- Keine Dateien außerhalb dieses Repos anfassen.
+- Keine Secrets committen (`.env`, Keys, Tokens).
