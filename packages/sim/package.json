@@ -1,0 +1,11 @@
+{
+  "name": "@tactics/sim",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "dependencies": {
+    "@tactics/core": "workspace:*"
+  }
+}
