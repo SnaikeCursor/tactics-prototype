@@ -29,9 +29,14 @@ Node version is pinned in `.nvmrc` (`24.21.0`).
 ```bash
 nvm use
 pnpm install
-pnpm lint
 pnpm test
+pnpm test:watch
+pnpm lint
+pnpm typecheck
+pnpm dev
 ```
+
+`pnpm test` is the agent feedback loop. Do not land rule or renderer changes without a green run from the repo root.
 
 ## Workflow
 

@@ -18,14 +18,23 @@ describe("createRng", () => {
   });
 
   it("rejects a missing seed so chance cannot fall back to entropy", () => {
-    expect(() => createRng()).toThrow(/integer seed/);
+    expect(() => {
+      // @ts-expect-error seed is required
+      createRng();
+    }).toThrow(/integer seed/);
   });
 });
 
 describe("requireRng", () => {
   it("rejects calls that omit an injected generator", () => {
-    expect(() => requireRng()).toThrow(/injected seedable RNG/);
-    expect(() => pick(undefined, ["a"])).toThrow(/injected seedable RNG/);
+    expect(() => {
+      // @ts-expect-error rng is required
+      requireRng();
+    }).toThrow(/injected seedable RNG/);
+    expect(() => {
+      // @ts-expect-error rng is required
+      pick(undefined, ["a"]);
+    }).toThrow(/injected seedable RNG/);
   });
 });
 

@@ -27,7 +27,9 @@ pnpm install
 ```
 
 ```bash
-pnpm lint
-pnpm format
 pnpm test
+pnpm test:watch
+pnpm lint
+pnpm typecheck
+pnpm dev
 ```

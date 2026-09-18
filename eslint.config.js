@@ -16,6 +16,15 @@ export default [
     },
   },
   {
+    files: ["packages/web/**/*.{js,mjs,cjs}"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
+  },
+  {
     files: ["packages/core/**/*.{js,mjs,cjs}"],
     rules: {
       "no-restricted-imports": [
