@@ -1,21 +1,16 @@
-# Regeln
+# Spielregeln
 
-## Schichten
+Quelle der Wahrheit. `packages/core` folgt dieser Datei. Steht eine Regel nicht hier, existiert sie nicht.
 
-```
-packages/core   Schicht A — Regellogik
-packages/web    Schicht B — Renderer, importiert core
-packages/sim    Headless-Simulator, importiert core
-```
+Widerspricht der Code dieser Datei, gewinnt `RULES.md`. Zuerst hier ändern, dann implementieren und testen.
 
-- `core` darf `web` und `sim` nicht importieren.
-- `web` und `sim` dürfen `core` importieren.
-- `core` hat keine Produktionsabhängigkeit. Der einzige erlaubte Extra-Bezug ist der Test-Runner (Vitest).
+## Status
 
-Diese Grenzen sind in `eslint.config.js` technisch erzwungen.
+Noch kein Regelwerk. Keine Einheiten, kein Kampf, keine Economy, keine Balancing-Zahlen.
 
-## Zufall
+Neue Spielregeln zuerst in dieser Datei festhalten. Zahlen nicht stillschweigend im Code ändern.
 
-Zufall in `core` läuft ausschließlich über einen injizierten, seedbaren Generator (`createRng(seed)` / `requireRng(rng)`), nie über `Math.random()`.
+## Invarianten
 
-Ohne festes Seed sind Tests und der Simulator wertlos: dieselbe Eingabe muss dieselbe Folge ergeben.
+- `web` und `sim` erfinden keine eigenen Spielregeln. Sie rufen `core` auf.
+- Jede zufällige Spielentscheidung ist seedbar. Dieselbe Eingabe plus dasselbe Seed ergibt dieselbe Folge.

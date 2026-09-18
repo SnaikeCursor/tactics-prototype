@@ -12,7 +12,7 @@ docs/RULES.md
 docs/DECISIONS.md
 ```
 
-Architecture rules live in `docs/RULES.md`. Agents: read `CLAUDE.md`.
+Game rules live in `docs/RULES.md`. Architecture and agent rules live in `CLAUDE.md`.
 
 ## Setup
 
