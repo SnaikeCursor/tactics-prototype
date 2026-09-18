@@ -185,6 +185,20 @@ importers:
         specifier: ^5.0.1
         version: 5.0.1(vite@8.3.0)
 
+  packages/core: {}
+
+  packages/sim:
+    dependencies:
+      '@tactics/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/web:
+    dependencies:
+      '@tactics/core':
+        specifier: workspace:*
+        version: link:../core
+
 packages:
 
   '@cacheable/memory@2.2.0':
