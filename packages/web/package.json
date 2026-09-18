@@ -1,0 +1,17 @@
+{
+  "name": "@tactics/web",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@tactics/core": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^8.3.0"
+  }
+}
